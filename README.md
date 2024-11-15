@@ -31,14 +31,11 @@ Follow these steps to set up the project on your local machine.
 
 ### Clone the Repository
 
-```bash
 git clone https://github.com/yourusername/AppointmentManagementSystem.git
 cd AppointmentManagementSystem
 Configuration
 Create a .env file in the root directory and configure the following environment variables:
 
-bash
-Copiar código
 DB_HOST=your-database-host
 DB_PORT=3306
 DB_DATABASE=your-database-name
@@ -54,14 +51,10 @@ Configure the SMTP settings in the project to use your Gmail account (for sendin
 Install Dependencies
 Run the following command to restore the necessary NuGet packages:
 
-bash
-Copiar código
 dotnet restore
 Database Setup
 Run the following commands to create the database and apply migrations:
 
-bash
-Copiar código
 dotnet ef migrations add InitialCreate
 dotnet ef database update
 This will create the necessary tables in your MySQL database based on the entity models defined in the project.
@@ -69,8 +62,6 @@ This will create the necessary tables in your MySQL database based on the entity
 Run the Application
 To start the application locally, use the following command:
 
-bash
-Copiar código
 dotnet run
 The API will be available at http://localhost:5000 by default.
 
