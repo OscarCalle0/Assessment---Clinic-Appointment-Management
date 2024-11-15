@@ -31,7 +31,7 @@ Follow these steps to set up the project on your local machine.
 
 ### Clone the Repository
 
-git clone https://github.com/yourusername/AppointmentManagementSystem.git
+git clone https:[//github.com/yourusername/AppointmentManagementSystem.git](https://github.com/OscarCalle0/Assessment---Clinic-Appointment-Management.git)
 cd AppointmentManagementSystem
 Configuration
 Create a .env file in the root directory and configure the following environment variables:
