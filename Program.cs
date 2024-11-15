@@ -3,6 +3,8 @@ using DotNetEnv;
 using Microsoft.OpenApi.Models;
 using Appointment_Management.Data; 
 using Microsoft.EntityFrameworkCore;
+using Appointment_Management.Services;
+using Appointment_Management.Repositories;
 
 Env.Load();
 
@@ -12,6 +14,10 @@ var DB_PORT = Environment.GetEnvironmentVariable("DB_PORT");
 var DB_USERNAME = Environment.GetEnvironmentVariable("DB_USERNAME");
 var DB_PASSWORD = Environment.GetEnvironmentVariable("DB_PASSWORD");
 
+var JWT_KEY = Environment.GetEnvironmentVariable("JWT_KEY");
+var JWT_ISSUER = Environment.GetEnvironmentVariable("JWT_ISSUER");
+var JWT_AUDIENCE = Environment.GetEnvironmentVariable("JWT_AUDIENCE");
+var JWT_EXPIRES_IN = Environment.GetEnvironmentVariable("JWT_EXPIRES_IN");
 
 var stringConnection = $"server={DB_HOST};port={DB_PORT};database={DB_NAME};uid={DB_USERNAME};password={DB_PASSWORD}";
 
@@ -21,22 +27,49 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseMySql(stringConnection, ServerVersion.Parse("8.0.20-mysql"));
 });
-// Add services to the container.
 
-
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Appointment Management API",
+        Version = "v1",
+        Description = "A simple API for managing appointments.",
+        Contact = new OpenApiContact
+        {
+            Name = "Your Name",
+            Email = "your.email@example.com"
+        }
+    });
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path == "/")
+    {
+        context.Response.Redirect("/swagger");
+    }
+    else
+    {
+        await next.Invoke();
+    }
+});
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Appointment Management API v1");
+        options.RoutePrefix = string.Empty;
+    });
 }
 
 app.UseHttpsRedirection();
@@ -45,4 +78,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+app.Run(); 

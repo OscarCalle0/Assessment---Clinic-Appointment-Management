@@ -1,5 +1,6 @@
 using Appointment_Management.Models;
 using Microsoft.EntityFrameworkCore;
+using Appointment_Management.Seeders;
 
 namespace Appointment_Management.Data;
 public class ApplicationDbContext : DbContext
@@ -22,6 +23,13 @@ public class ApplicationDbContext : DbContext
         base.OnModelCreating(modelBuilder);
 
         // call of the sedders
-       
+        UsersSeeder.Seed(modelBuilder);
+        SpecialtiesSeeder.Seed(modelBuilder);
+        RolesSeeder.Seed(modelBuilder);
+        DoctorsSeeder.Seed(modelBuilder);
+        PatientsSeeder.Seed(modelBuilder);
+        LogsSeeder.Seed(modelBuilder);
+        AvailabilitySchedulesSeeder.Seed(modelBuilder);
+        AppointmentsSeeder.Seed(modelBuilder);
     }
 }
