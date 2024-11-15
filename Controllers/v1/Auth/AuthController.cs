@@ -4,9 +4,8 @@ using Appointment_Management.Config;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
-using Appointment_Management.DTOs.Requests;
-using Appointment_Management.DTOs.Response;
 using Appointment_Management.Repositories;
+using Appointment_Management.Dto.Requests;  // Asegúrate de que esto esté presente
 
 namespace Appointment_Management.Controllers.v1.Auth
 {
