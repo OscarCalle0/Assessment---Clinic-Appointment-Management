@@ -1,7 +1,7 @@
 using Appointment_Management.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Hotel.Data;
+namespace Appointment_Management.Data;
 public class ApplicationDbContext : DbContext
 {
     public DbSet<Appointment> Appointments { get; set; }
