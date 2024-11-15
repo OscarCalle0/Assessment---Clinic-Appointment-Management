@@ -4,9 +4,6 @@ using Microsoft.OpenApi.Models;
 using Appointment_Management.Data; 
 using Microsoft.EntityFrameworkCore;
 
-
-
-
 Env.Load();
 
 var DB_HOST = Environment.GetEnvironmentVariable("DB_HOST");
