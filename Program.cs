@@ -1,4 +1,22 @@
+using System.Text;
+using DotNetEnv;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+Env.Load();
+
+var DB_HOST = Environment.GetEnvironmentVariable("DB_HOST");
+var DB_NAME = Environment.GetEnvironmentVariable("DB_NAME");
+var DB_PORT = Environment.GetEnvironmentVariable("DB_PORT");
+var DB_USERNAME = Environment.GetEnvironmentVariable("DB_USER");
+var DB_PASSWORD = Environment.GetEnvironmentVariable("DB_PASSWORD");
+
+
+//var stringConnection = $"server={DB_HOST};port={DB_PORT};database={DB_NAME};uid={DB_USER};password={DB_PASSWORD}";
+
 
 // Add services to the container.
 
